@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { DisplayThumbnailsComponent } from './display-thumbnails/display-thumbnails.component';
 import { DetailsButtonComponent } from './details-button/details-button.component';
+import { TransferVideoDetailsService } from '../custom-services/transfer-video-details.service';
 
 
 
@@ -11,6 +12,7 @@ import { DetailsButtonComponent } from './details-button/details-button.componen
   imports: [
     CommonModule
   ],
-  exports: [NotFoundComponent, DisplayThumbnailsComponent,DetailsButtonComponent]
+  exports: [NotFoundComponent, DisplayThumbnailsComponent,DetailsButtonComponent],
+  providers:[TransferVideoDetailsService]
 })
 export class CustomComponentsModule { }

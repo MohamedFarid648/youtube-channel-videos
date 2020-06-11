@@ -5,7 +5,8 @@ import { DisplayThumbnailsComponent } from '../custom-components/display-thumbna
 import { formatDate } from '@angular/common';
 import { DetailsButtonComponent } from '../custom-components/details-button/details-button.component';
 import { ApiConstants } from '../custom-models/apiConstants';
-import { Snippet, Thumbnail } from '../custom-models/getVideoChannelResponse';
+import { Snippet, Thumbnail } from '../custom-models/channelVideosResponse';
+import { NavigationExtras, Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -67,7 +68,7 @@ export class HomeComponent implements OnInit {
 
   source: LocalDataSource;//= new LocalDataSource();
 
-  constructor(private getChannelVideosService: GetChannelVideosService) { }
+  constructor(private getChannelVideosService: GetChannelVideosService,public router:Router) { }
 
   ngOnInit(): void {
     this.listedVideos = localStorage.getItem('ListedVideos')?JSON.parse(localStorage.getItem('ListedVideos')):[];
@@ -86,9 +87,12 @@ export class HomeComponent implements OnInit {
       this.getChannelVideosService.getSpecificChannelVideos(this.selectedChannel, this.userKey).subscribe(res => {
         console.log(res);
         res.items.forEach(i => {
+          i.snippet.videoId = i.id.videoId;
           this.listedVideos.push(i.snippet);
         });
         localStorage.setItem('ListedVideos',JSON.stringify(this.listedVideos));
+        localStorage.setItem('userKey',this.userKey);
+
      
         this.loadSourceTable();
       }, err => {
@@ -121,11 +125,21 @@ export class HomeComponent implements OnInit {
       this.source.load(this.searchedListedVideos);
       // this.source.setFilter([
       //   {
-      //     field: 'productSpecialist',
+      //     field: 'title',
       //     search: query
       //   }
       // ], false);//false to change AND to OR
 
     }
+  }
+
+  goToDetails() {
+    // this.clickDetails.emit(this.value);
+    const navigationExtra: NavigationExtras = {
+      state: {
+        videoDetails: this.listedVideos[0]
+      }
+    }
+    this.router.navigate(['video-details'], navigationExtra);
   }
 }

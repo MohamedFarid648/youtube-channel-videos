@@ -19,12 +19,10 @@
 <div class="container">
 
     <div class="row">
-        <div class="col-md-6 col-12">
-            <div class="form-group">
-                <label>Chennel Id</label>
-                <input type="text" class="form-control" placeholder="Enter Channel Id" [(ngModel)]="selectedChannel"
-                    (change)="getChannelVideos()">
-                <!-- <label>Choose Channel:</label>
+
+        <div class="col-md-4 col-12">
+            <div class="form-group">    
+                <label>Choose Channel:</label>
                 <select class="form-control" [(ngModel)]="selectedChannel" (change)="getChannelVideos()">
                     <option value="UCeeDRl9JniHAXcwiPZ1_Sgw">It's The Quran</option>
                     <option value="UClf4BTEySRAQhnkQvJh6l8w" >El Nada Tv</option>
@@ -34,11 +32,19 @@
                     <option value="UCpJCyqcyNSWE6gW4UuCnJRA">FCIH OCWx</option>
                     <option value="UCTU_lRXlIBduBKaNNqRzT4w">FCIH OCW</option>
                     <option value="UCFOdc57jigXVfIVmsfgokeQ">Free4arab | Information Technology</option>
-                </select> -->
+                </select>
             </div>
         </div>
 
-        <div class="col-md-6 col-12">
+        <div class="col-md-4 col-12">
+            <div class="form-group">
+                <label>Chennel Id</label>
+                <input type="text" class="form-control" placeholder="Enter Channel Id" [(ngModel)]="selectedChannel"
+                    (change)="getChannelVideos()">
+            </div>
+        </div>
+
+        <div class="col-md-4 col-12">
             <div class="form-group">
                 <label>User Key</label>
                 <input type="text" class="form-control" placeholder="Enter Your Key" [(ngModel)]="userKey"
@@ -55,12 +61,9 @@
         </div>
     </div>
 
-    <div class="toast">
-        <div class="toast-header">
-            Toast Header
-        </div>
-        <div class="toast-body">
-            Some text inside the toast body
+    <div class="row">
+        <div class="col-md-12 col-12">
+            <button (click)="goToDetails()">details</button>
         </div>
     </div>
 </div>

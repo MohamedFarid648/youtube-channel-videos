@@ -6,17 +6,15 @@ import { HomeComponent } from './home.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { GetChannelVideosService } from '../custom-services/get-channel-videos.service';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 
 @NgModule({
   declarations: [HomeComponent],
   imports: [
     CommonModule, FormsModule, ReactiveFormsModule,
-    HttpClientModule,
     HomeRoutingModule,
     Ng2SmartTableModule
 
-  ],providers:[GetChannelVideosService , HttpClient]
+  ],providers:[GetChannelVideosService ]
 })
 export class HomeModule { }

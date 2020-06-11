@@ -1,5 +1,6 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Router, NavigationExtras } from '@angular/router';
+import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
+import { TransferVideoDetailsService } from 'src/app/custom-services/transfer-video-details.service';
 
 @Component({
   selector: 'app-details-button',
@@ -9,21 +10,13 @@ import { Router, NavigationExtras } from '@angular/router';
 export class DetailsButtonComponent implements OnInit {
 
   @Input() value;// data from home page
-  @Output() clickDetails = new EventEmitter<any>();
-  constructor(private router: Router) { }
+  constructor(private router: Router, private transferVideoDetailsService: TransferVideoDetailsService) { }
 
   ngOnInit(): void {
-    // console.log(this.value);
   }
 
   goToDetails() {
-    // this.clickDetails.emit(this.value);
-    console.log(this.value);
-    const navigationExtra: NavigationExtras = {
-      state: {
-        videoDetails: this.value
-      }
-    }
-    this.router.navigateByUrl('video-details', navigationExtra);
+    localStorage.setItem('videoDetails',JSON.stringify(this.value));
+    this.router.navigate(['video-details']);
   }
 }

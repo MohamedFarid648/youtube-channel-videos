@@ -1,3 +1,5 @@
+import { VideoStatistics, ContentDetails } from './videoDetailsResponse';
+
 export class KindEtag{
     kind: string;
     etag: string;
@@ -27,12 +29,16 @@ export class Snippet {
 
     publishedAt: string;
     channelId: string;
+    videoId: string;
     title: string;
     description: string;
     thumbnails: Thumbnail
     channelTitle: string;
     liveBroadcastContent: string;
     publishTime: string;
+    statistics:VideoStatistics;
+    ContentDetails:ContentDetails;
+
 
 }
 
@@ -48,3 +54,4 @@ export class PictureProperty {
     width: number;
     height: number;
 }
+
