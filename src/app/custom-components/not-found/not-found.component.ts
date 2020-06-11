@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'ngx-not-found',
@@ -7,7 +8,11 @@ import { Component } from '@angular/core';
 })
 export class NotFoundComponent {
 
-  constructor() {
+  constructor(private router:Router) {
   }
 
+  goToHomePage(){
+
+    this.router.navigateByUrl('home');
+  }
 }

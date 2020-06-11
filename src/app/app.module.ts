@@ -3,16 +3,14 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NotFoundComponent } from './components/not-found/not-found.component';
+import { CustomComponentsModule } from './custom-components/custom-components.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    NotFoundComponent,
-
+    AppComponent
   ],
   imports: [
-    BrowserModule,
+    BrowserModule,CustomComponentsModule,
     AppRoutingModule
   ],
   providers: [],

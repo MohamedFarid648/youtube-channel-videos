@@ -1,22 +1,66 @@
-<div class="row ">
-    <div class="col-md-6 col-12 text-left">
-        <img class="logo" src="../../assets/images/download.png">
-    </div>
-
-
-    <div class="col-md-6 text-right">
-
+<nav class="navbar navbar-light bg-light justify-content-between">
+    <img class="logo" src="../../assets/images/download.png">
+    <form class="form-inline">
         <div class="form-group">
             <div class="input-group">
                 <div class="input-group-prepend">
-                    <span class="input-group-text">
+                    <span class="input-group-text searchIcon">
                         <i class="fa fa-search"></i>
                     </span>
                 </div>
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-
+                <input #search class="form-control searchInput" type="search" (keyup)="onSearch(search.value)"
+                    placeholder="Search" aria-label="Search">
 
             </div>
+        </div>
+    </form>
+</nav>
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-6 col-12">
+            <div class="form-group">
+                <label>Chennel Id</label>
+                <input type="text" class="form-control" placeholder="Enter Channel Id" [(ngModel)]="selectedChannel"
+                    (change)="getChannelVideos()">
+                <!-- <label>Choose Channel:</label>
+                <select class="form-control" [(ngModel)]="selectedChannel" (change)="getChannelVideos()">
+                    <option value="UCeeDRl9JniHAXcwiPZ1_Sgw">It's The Quran</option>
+                    <option value="UClf4BTEySRAQhnkQvJh6l8w" >El Nada Tv</option>
+                    <option value="UCOll3M-P7oKs5cSrQ9ytt6g">Zad Channel</option>
+                    <option value="UCeH0M5ZjsNE1BDBs-AeH4sA"> Islamweb - إسلام ويب</option>
+                    <option value="UCSNkfKl4cU-55Nm-ovsvOHQ">Elzero Web School</option>
+                    <option value="UCpJCyqcyNSWE6gW4UuCnJRA">FCIH OCWx</option>
+                    <option value="UCTU_lRXlIBduBKaNNqRzT4w">FCIH OCW</option>
+                    <option value="UCFOdc57jigXVfIVmsfgokeQ">Free4arab | Information Technology</option>
+                </select> -->
+            </div>
+        </div>
+
+        <div class="col-md-6 col-12">
+            <div class="form-group">
+                <label>User Key</label>
+                <input type="text" class="form-control" placeholder="Enter Your Key" [(ngModel)]="userKey"
+                    (change)="getChannelVideos()">
+            </div>
+        </div>
+
+
+    </div>
+    <div class="row mt-3">
+        <div class="col-md-12 col-12">
+            <ng2-smart-table [settings]="settings" [source]="source">
+            </ng2-smart-table>
+        </div>
+    </div>
+
+    <div class="toast">
+        <div class="toast-header">
+            Toast Header
+        </div>
+        <div class="toast-body">
+            Some text inside the toast body
         </div>
     </div>
 </div>
