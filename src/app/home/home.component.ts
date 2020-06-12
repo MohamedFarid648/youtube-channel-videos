@@ -6,7 +6,6 @@ import { formatDate } from '@angular/common';
 import { DetailsButtonComponent } from '../custom-components/details-button/details-button.component';
 import { ApiConstants } from '../custom-models/apiConstants';
 import { Snippet, Thumbnail } from '../custom-models/channelVideosResponse';
-import { NavigationExtras, Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -37,7 +36,7 @@ export class HomeComponent implements OnInit {
       thumbnails: {
         title: '',
         filter: false,
-        valuePrepareFunction: (thumbnail:Thumbnail) => {
+        valuePrepareFunction: (thumbnail: Thumbnail) => {
           return `<img src="${thumbnail.default.url}"/>`
         },
         type: 'html',
@@ -68,36 +67,37 @@ export class HomeComponent implements OnInit {
 
   source: LocalDataSource;//= new LocalDataSource();
 
-  constructor(private getChannelVideosService: GetChannelVideosService,public router:Router) { }
+  constructor(private getChannelVideosService: GetChannelVideosService) { }
 
   ngOnInit(): void {
-    this.listedVideos = localStorage.getItem('ListedVideos')?JSON.parse(localStorage.getItem('ListedVideos')):[];
+    this.listedVideos = localStorage.getItem('ListedVideos') ? JSON.parse(localStorage.getItem('ListedVideos')) : [];
     console.log(this.listedVideos);
-    if(this.listedVideos.length  == 0){
+    if (this.listedVideos.length == 0) {
       this.getChannelVideos();
-    }else{
+    } else {
       this.loadSourceTable();
     }
   }
 
 
   getChannelVideos() {
-    this.listedVideos = [];
     if (this.selectedChannel && this.userKey) {
+
       this.getChannelVideosService.getSpecificChannelVideos(this.selectedChannel, this.userKey).subscribe(res => {
         console.log(res);
+        this.listedVideos = [];
         res.items.forEach(i => {
           i.snippet.videoId = i.id.videoId;
           this.listedVideos.push(i.snippet);
         });
-        localStorage.setItem('ListedVideos',JSON.stringify(this.listedVideos));
-        localStorage.setItem('userKey',this.userKey);
+        localStorage.setItem('ListedVideos', JSON.stringify(this.listedVideos));
+        localStorage.setItem('userKey', this.userKey);
         this.loadSourceTable();
       }, err => {
         console.log(err);
-        alert("Something went wrong , please check your user key");
+        alert("Something went wrong , please check your user key or  try again later");
       });
-    }else{
+    } else {
       alert('please fill all fields');
     }
 
@@ -129,15 +129,5 @@ export class HomeComponent implements OnInit {
       // ], false);//false to change AND to OR
 
     }
-  }
-
-  goToDetails() {
-    // this.clickDetails.emit(this.value);
-    const navigationExtra: NavigationExtras = {
-      state: {
-        videoDetails: this.listedVideos[0]
-      }
-    }
-    this.router.navigate(['video-details'], navigationExtra);
   }
 }

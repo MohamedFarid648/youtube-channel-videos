@@ -1,7 +1,10 @@
 <div class="container">
 
-    <div class="row">
-        <div class="col-12">
+    <div class="row mt-3">
+        <div class="col-3 text-center">
+            <button class="btn btn-link" (click)="goToHomePage()">Home Page</button>
+        </div>
+        <div class="col-9">
             <img [src]="videoDetails?.thumbnails?.high?.url" [width]="videoDetails?.thumbnails?.high?.width"
                 [height]="videoDetails?.thumbnails?.high?.height" class="videoImg" alt="">
         </div>
@@ -14,13 +17,53 @@
         </div>
 
         <div class="col-md-4 col-12">
-            <button class="btn btn-danger detailsButton py-0 px-2"> Add To Favourite</button>
+            <button class="btn btn-danger  py-0 px-2" *ngIf="!videoDetails.isFavouriteVideo "
+                (click)="addToFavourite()"> Add To Favourite</button>
+
+            <button class="btn btn-danger  py-0 px-2" *ngIf="videoDetails.isFavouriteVideo "
+                (click)="removeFromFavourite()"> Remove From Favourite</button>
         </div>
     </div>
 
     <div class="row">
         <div class="col-12">
-            <star-rating value="5" totalstars="5" checkedcolor="red" uncheckedcolor="black" size="24px" readonly="false" (rate)="onRate($event)"></star-rating>
+            <hr>
+            <div class="row">
+
+                <div class="col-4">
+                    <span><strong class="rateText">Rate Now </strong></span>
+                    <ngb-rating class="rating" (rateChange)="changeRate($event)" [(rate)]="videoDetails.rateValue"
+                        max="5">
+                    </ngb-rating>
+                </div>
+                <div class="col-4 text-center">
+                    <span *ngIf="videoDetails.videoDuration"><strong class="rateText">Duration </strong></span>
+                    <span><strong>{{videoDetails.videoDuration}} </strong></span>
+
+                </div>
+                <div class="col-4 text-right" *ngIf="videoDetails.statistics">
+                    <i class="fa fa-eye" aria-hidden="true"></i>
+                    <span><strong> {{videoDetails.statistics?.viewCount}} </strong></span>
+                    <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+                    <span><strong> {{videoDetails.statistics?.likeCount}} </strong></span>
+
+                </div>
+            </div>
+
+            <hr>
+        </div>
+
+        <div class="col-12" *ngIf="videoDetails.publishedAt">
+            <span><strong class="dateText">Published On </strong></span>
+            <span><strong>{{videoDetails.publishedAt |date}} </strong></span>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <p class="text-justify">
+                {{videoDetails.description}}
+            </p>
         </div>
     </div>
 </div>

@@ -37,7 +37,12 @@ export class Snippet {
     liveBroadcastContent: string;
     publishTime: string;
     statistics:VideoStatistics;
-    ContentDetails:ContentDetails;
+    contentDetails:ContentDetails;
+    isFavouriteVideo: boolean;
+    rateValue: number;
+    videoDuration: string;
+
+
 
 
 }
