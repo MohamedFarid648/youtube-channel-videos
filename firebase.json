@@ -1,0 +1,10 @@
+{
+  "hosting": {
+    "public": "dist/youtube-channel-videos",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}
