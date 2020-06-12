@@ -92,8 +92,6 @@ export class HomeComponent implements OnInit {
         });
         localStorage.setItem('ListedVideos',JSON.stringify(this.listedVideos));
         localStorage.setItem('userKey',this.userKey);
-
-     
         this.loadSourceTable();
       }, err => {
         console.log(err);
