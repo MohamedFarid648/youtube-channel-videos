@@ -6,6 +6,7 @@ import { formatDate } from '@angular/common';
 import { DetailsButtonComponent } from '../custom-components/details-button/details-button.component';
 import { ApiConstants } from '../custom-models/apiConstants';
 import { Snippet, Thumbnail } from '../custom-models/channelVideosResponse';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -23,14 +24,14 @@ export class HomeComponent implements OnInit {
 
   settings = {
     //actions:false,
-    pager: {
+    mode:'external',
+        pager: {
       display: true,
       //perPage: 5
     },
-    actions: {
+  trueions: {
       edit: false,
-      delete: false,
-      add: false
+false
     },
     columns: {
       thumbnails: {
@@ -67,7 +68,7 @@ export class HomeComponent implements OnInit {
 
   source: LocalDataSource;//= new LocalDataSource();
 
-  constructor(private getChannelVideosService: GetChannelVideosService) { }
+  constructor(private getChannelVideosService: GetChannelVideosService , private router: Router) { }
 
   ngOnInit(): void {
     this.listedVideos = localStorage.getItem('ListedVideos') ? JSON.parse(localStorage.getItem('ListedVideos')) : [];
@@ -130,4 +131,18 @@ export class HomeComponent implements OnInit {
 
     }
   }
+  
+  editRow(event){
+
+    console.log(event);
+    let navigtionExtras = {
+        state:{
+          favouriteVideos:event.data
+        },
+   // relativeTo: this.activatedRoute
+    };
+    this.router.navigate(['video-details'],navigtionExtras);
+
+  }
+
 }

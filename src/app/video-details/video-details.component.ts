@@ -19,7 +19,16 @@ export class VideoDetailsComponent implements OnInit {
   isInFavouriteList: boolean = false;
   constructor(public router: Router, public activatedRoute: ActivatedRoute,
     private getChannelVideosService: GetChannelVideosService,
-    private transferVideoDetailsService: TransferVideoDetailsService) { }
+    private transferVideoDetailsService: TransferVideoDetailsService) { 
+        if (this.router.getCurrentNavigation()?.extras && this.router.getCurrentNavigation()?.extras.state) {
+          console.log(this.router.getCurrentNavigation().extras.state);
+          //this.favouriteVideos = this.router.getCurrentNavigation().extras.state.favouriteVideos;
+        }
+        else {
+          console.log('No extras');
+        }
+
+    }
 
   ngOnInit(): void {
     this.getParameters();
