@@ -23,52 +23,48 @@ export class HomeComponent implements OnInit {
   selectedPaging: string = '20';
 
   settings = {
-    //actions:false,
-    mode:'external',
-        pager: {
+    actions:false,
+    mode: 'external',
+    pager: {
       display: true,
       //perPage: 5
     },
-  trueions: {
-      edit: false,
-false
-    },
-    columns: {
-      thumbnails: {
-        title: '',
-        filter: false,
-        valuePrepareFunction: (thumbnail: Thumbnail) => {
-          return `<img src="${thumbnail.default.url}"/>`
+      columns: {
+        thumbnails: {
+          title: '',
+          filter: false,
+          valuePrepareFunction: (thumbnail: Thumbnail) => {
+            return `<img src="${thumbnail.default.url}"/>`
+          },
+          type: 'html',
+          //renderComponent: DisplayThumbnailsComponent,
         },
-        type: 'html',
-        //renderComponent: DisplayThumbnailsComponent,
-      },
-      title: {
-        title: 'Title',
-        type: 'string',
-      },
-      publishedAt: {
-        title: 'Publish Date',
-        type: 'string',
-        valuePrepareFunction: (date) => {
-          return formatDate(date, 'dd-mm-yyyy', 'en-US');
+        title: {
+          title: 'Title',
+          type: 'string',
+        },
+        publishedAt: {
+          title: 'Publish Date',
+          type: 'string',
+          valuePrepareFunction: (date) => {
+            return formatDate(date, 'dd-mm-yyyy', 'en-US');
+          }
+        },
+        actions: {
+          title: 'Details',
+          filter: false,
+          valuePrepareFunction: (cell, row, data) => {
+            return row;
+          },
+          type: 'custom',
+          renderComponent: DetailsButtonComponent,
         }
       },
-      actions: {
-        title: 'Details',
-        filter: false,
-        valuePrepareFunction: (cell, row, data) => {
-          return row;
-        },
-        type: 'custom',
-        renderComponent: DetailsButtonComponent,
-      }
-    },
-  };
 
+  }
   source: LocalDataSource;//= new LocalDataSource();
 
-  constructor(private getChannelVideosService: GetChannelVideosService , private router: Router) { }
+  constructor(private getChannelVideosService: GetChannelVideosService, private router: Router) { }
 
   ngOnInit(): void {
     this.listedVideos = localStorage.getItem('ListedVideos') ? JSON.parse(localStorage.getItem('ListedVideos')) : [];
@@ -131,17 +127,17 @@ false
 
     }
   }
-  
-  editRow(event){
+
+  editRow(event) {
 
     console.log(event);
     let navigtionExtras = {
-        state:{
-          favouriteVideos:event.data
-        },
-   // relativeTo: this.activatedRoute
+      state: {
+        favouriteVideos: event.data
+      },
+      // relativeTo: this.activatedRoute
     };
-    this.router.navigate(['video-details'],navigtionExtras);
+    this.router.navigate(['video-details'], navigtionExtras);
 
   }
 
