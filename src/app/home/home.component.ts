@@ -50,6 +50,14 @@ export class HomeComponent implements OnInit {
             return formatDate(date, 'dd-mm-yyyy', 'en-US');
           }
         },
+        videoId: {
+          title: 'Link',
+          type: 'html',
+          valuePrepareFunction: (data) => {
+            console.log(data);
+            return `<a target="blank" href="https://www.youtube.com/watch?v=${data}">View<a>`;
+          }
+        },
         actions: {
           title: 'Details',
           filter: false,
